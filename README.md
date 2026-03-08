@@ -12,7 +12,7 @@ npm run dev
 To access the app from other devices on your network:
 
 ```bash
-npm run dev -- --host
+npm run dev:host
 ```
 
 ## 👩‍🍳 Custom Recipes
