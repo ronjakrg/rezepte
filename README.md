@@ -22,9 +22,9 @@ Place your recipe JSON files and images in the `data/` folder:
 ```
 data/
 ├── recipes/
-│   └── meine-rezepte.json
+│   └── rezepte.json
 └── images/
-    └── couscous-pfanne.jpeg
+    └── rezept-bild.png
 ```
 
 - Recipe files should follow the format in `data/recipes/example.json`.
