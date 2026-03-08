@@ -6,12 +6,15 @@ export interface KeywordIcon {
 }
 
 const keywordIcons: Record<string, KeywordIcon> = {
-  "Pfanne": { type: "emoji", value: "🍳" },
-  "Pasta": { type: "emoji", value: "🍝" },
-  "Reis": { type: "emoji", value: "🍚" },
+  "Auflauf": { type: "emoji", value: "🍲" },
+  "Ofen": { type: "image", value: ovenIcon },
   "One-Pot": { type: "emoji", value: "🥘" },
   "One-Pot Gericht": { type: "emoji", value: "🥘" },
-  "Ofen": { type: "image", value: ovenIcon },
+  "Pasta": { type: "emoji", value: "🍝" },
+  "Pfanne": { type: "emoji", value: "🍳" },
+  "Reis": { type: "emoji", value: "🍚" },
+  "Schnell": { type: "emoji", value: "⚡" },
+  "Sonstiges": { type: "emoji", value: "🍴" },
 };
 
 const fallback: KeywordIcon = { type: "emoji", value: "🏷️" };
