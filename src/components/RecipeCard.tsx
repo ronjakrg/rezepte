@@ -1,6 +1,6 @@
 import type { Recipe } from "../types";
 import images from "../lib/images";
-import KeywordBadge from "./KeywordBadge";
+import Badge from "./Badge";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -16,8 +16,8 @@ function RecipeCard({ recipe, onSelect }: RecipeCardProps) {
       <div className="recipe-tile-info">
         <h3 className="recipe-tile-title">{recipe.title}</h3>
         <div className="recipe-meta">
-          {recipe.keywords.map((kw) => (
-            <KeywordBadge key={kw} keyword={kw} />
+          {recipe.keywords.map((keyword) => (
+            <Badge key={keyword} label={keyword} />
           ))}
         </div>
       </div>

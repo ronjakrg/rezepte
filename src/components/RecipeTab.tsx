@@ -1,6 +1,6 @@
 import recipes from "../lib/recipes";
 import RecipeCard from "./RecipeCard";
-import RecipeOverview from "./RecipeOverview";
+import RecipeDetails from "./RecipeDetails";
 import type { Recipe } from "../types";
 import { getKeywordIcon } from "../lib/keywords";
 
@@ -21,7 +21,7 @@ interface RecipeTabProps {
 
 function RecipeTab({ selectedRecipe, onSelectRecipe }: RecipeTabProps) {
   return selectedRecipe ? (
-    <RecipeOverview recipe={selectedRecipe} />
+    <RecipeDetails recipe={selectedRecipe} />
   ) : (
     <>
       {Object.entries(recipesByCategory).map(([category, items]) => (

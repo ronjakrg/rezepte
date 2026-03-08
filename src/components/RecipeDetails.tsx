@@ -1,34 +1,34 @@
 import { useState } from "react";
 import type { Recipe } from "../types";
 import images from "../lib/images";
-import KeywordBadge from "./KeywordBadge";
+import Badge from "./Badge";
 
-interface RecipeOverviewProps {
+interface RecipeDetailsProps {
   recipe: Recipe;
 }
 
-function RecipeOverview({ recipe }: RecipeOverviewProps) {
+function RecipeDetails({ recipe }: RecipeDetailsProps) {
   const imageSrc = images[recipe.image?.replace(/\.[^.]+$/, "") ?? ""] ?? images["example"];
   const [servings, setServings] = useState(1);
 
   return (
-    <div className="recipe-detail">
-      <div className="recipe-detail-header">
+    <div className="recipe-details">
+      <div className="recipe-details-header">
         <h2>{recipe.title}</h2>
         <div className="recipe-meta">
-          <span className="keyword-badge">🕐 {recipe.preptime} min</span>
-          <KeywordBadge keyword={recipe.category} />
-          {recipe.keywords.map((kw) => (
-            <KeywordBadge key={kw} keyword={kw} />
+          <span className="badge">🕐 {recipe.preptime} min</span>
+          <Badge label={recipe.category} />
+          {recipe.keywords.map((keyword) => (
+            <Badge key={keyword} label={keyword} />
           ))}
         </div>
       </div>
 
-      <div className="recipe-detail-grid">
-        <div className="recipe-detail-left">
-          <img className="recipe-detail-image" src={imageSrc} alt={recipe.title} />
+      <div className="recipe-details-grid">
+        <div className="recipe-details-left">
+          <img className="recipe-details-image" src={imageSrc} alt={recipe.title} />
         </div>
-        <div className="recipe-detail-right">
+        <div className="recipe-details-right">
           <h3>Zubereitung</h3>
           <ol>
             {recipe.instructions.map((step, i) => (
@@ -36,8 +36,8 @@ function RecipeOverview({ recipe }: RecipeOverviewProps) {
             ))}
           </ol>
           {recipe.ovenInstructions && (
-            <div className="oven-badge">
-              <KeywordBadge keyword="Ofen" showLabel={false} />
+            <div className="oven-instructions-badge">
+              <Badge label="Ofen" showLabel={false} />
               <span>{recipe.ovenInstructions.temperature}° {recipe.ovenInstructions.mode}, {recipe.ovenInstructions.time} min</span>
             </div>
           )}
@@ -77,4 +77,4 @@ function RecipeOverview({ recipe }: RecipeOverviewProps) {
   );
 }
 
-export default RecipeOverview;
+export default RecipeDetails;
