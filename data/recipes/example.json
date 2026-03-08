@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Beispielrezept 1",
+    "preptime": 123,
+    "category": "One-Pot Gericht",
+    "keywords": ["Mealprep", "Schnell"],
+    "ingredients": [
+      { "amount": 1, "unit": "Tasse.", "name": "Beispielzutat" },
+      { "amount": 2, "unit": "Stk.", "name": "Beispielzutat" },
+      { "amount": 3, "unit": "TL", "name": "Beispielzutat" },
+      { "amount": 123, "unit": "g", "name": "Beispielzutat" }      
+    ],
+    "instructions": [
+      "Beispielzutaten abwiegen und schneiden",
+      "Beispielzutaten anbraten",
+      "Mit Salz & Pfeffer abschmecken"
+    ],
+    "image": ""
+  },
+  {
+    "title": "Beispielrezept 2",
+    "preptime": 42,
+    "category": "Auflauf",
+    "keywords": ["Mealprep", "Ofen"],
+    "ingredients": [
+      { "amount": 1, "unit": "Tasse.", "name": "Beispielzutat" },
+      { "amount": 2, "unit": "Stk.", "name": "Beispielzutat" },
+      { "amount": 3, "unit": "TL", "name": "Beispielzutat" },
+      { "amount": 123, "unit": "g", "name": "Beispielzutat" }      
+    ],
+    "instructions": [
+      "Beispielzutaten waschen und abwiegen",
+      "Beispielzutaten schneiden und auf einem Backblech verteilen"
+    ],
+    "ovenInstructions": {
+      "temperature": 160,
+      "mode": "Umluft",
+      "time": 30
+    },
+    "image": ""
+  }
+]
