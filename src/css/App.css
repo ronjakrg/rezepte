@@ -81,6 +81,7 @@ h4 {
 /* Buttons */
 .icon-btn {
   background: none;
+  border: none;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
   font-size: 1.3rem;
@@ -110,7 +111,7 @@ h4 {
   cursor: pointer;
   font-size: 1rem;
   color: var(--color-gray);
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.75rem 0.35rem 0.75rem;
   margin-top: var(--grid-gap);
 }
 .arrow-btn:hover {

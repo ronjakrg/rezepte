@@ -56,7 +56,7 @@ function RecipePicker({ onSelect, onClose }: RecipePickerProps) {
               onChange={(e) => setNote(e.target.value)}
             />
             <button className="arrow-btn" type="button" onClick={handleNote}>
-              ➞
+              <i className="bi bi-arrow-right"></i>
             </button>
           </div>
           <div className="recipe-picker-grid">

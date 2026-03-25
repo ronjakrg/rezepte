@@ -16,7 +16,7 @@ function App() {
       <nav className="tabs">
         {selectedRecipe ? (
           <button className="icon-btn" onClick={() => setSelectedRecipe(null)}>
-            ←
+            <i className="bi bi-arrow-left"></i>
           </button>
         ) : (
           <span className="icon-btn">
