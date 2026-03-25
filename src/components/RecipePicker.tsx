@@ -37,7 +37,7 @@ function RecipePicker({ onSelect, onClose }: RecipePickerProps) {
           <div className="recipe-picker-header">
             Rezept auswählen
             <button className="close-btn" onClick={onClose}>
-              ✕
+              <i className="bi bi-x-lg"></i>
             </button>
           </div>
           <input
