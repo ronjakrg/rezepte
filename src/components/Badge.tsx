@@ -3,9 +3,10 @@ import { getKeywordIcon } from "../lib/keywords";
 interface BadgeProps {
   label: string;
   showLabel?: boolean;
+  children?: React.ReactNode;
 }
 
-function Badge({ label: keyword, showLabel = true }: BadgeProps) {
+function Badge({ label: keyword, showLabel = true, children }: BadgeProps) {
   const icon = getKeywordIcon(keyword);
 
   return (
@@ -13,9 +14,10 @@ function Badge({ label: keyword, showLabel = true }: BadgeProps) {
       {icon.type === "emoji" ? (
         icon.value
       ) : (
-        <img className="icon-img" src={icon.value} alt={keyword} />
+        <img className="image-as-emoji" src={icon.value} alt={keyword} />
       )}
       {showLabel && " " + keyword}
+      {children}
     </span>
   );
 }

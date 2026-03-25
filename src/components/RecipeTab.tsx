@@ -11,7 +11,7 @@ const recipesByCategory = recipes.reduce<Record<string, Recipe[]>>(
     acc[cat].push(recipe);
     return acc;
   },
-  {}
+  {},
 );
 
 interface RecipeTabProps {
@@ -25,8 +25,9 @@ function RecipeTab({ selectedRecipe, onSelectRecipe }: RecipeTabProps) {
   ) : (
     <>
       {Object.entries(recipesByCategory).map(([category, items]) => (
-        <details key={category} className="category-section" open>
-          <summary className="category-header">
+        <details key={category} className="mb" open>
+          <summary className="summary-heading">
+            <i className="bi bi-chevron-right summary-chevron"></i>
             {getKeywordIcon(category).value} {category}
           </summary>
           <div className="recipe-grid">

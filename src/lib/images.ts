@@ -1,7 +1,10 @@
-const modules = import.meta.glob<string>("../../data/images/*.{jpg,jpeg,png,webp}", {
-  eager: true,
-  import: "default",
-});
+const modules = import.meta.glob<string>(
+  "../../data/images/*.{jpg,jpeg,png,webp}",
+  {
+    eager: true,
+    import: "default",
+  },
+);
 
 const images: Record<string, string> = {};
 for (const path in modules) {

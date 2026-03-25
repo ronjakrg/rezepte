@@ -8,14 +8,15 @@ interface RecipeCardProps {
 }
 
 function RecipeCard({ recipe, onSelect }: RecipeCardProps) {
-  const imageSrc = images[recipe.image?.replace(/\.[^.]+$/, "") ?? ""] ?? images["example"];
+  const imageSrc =
+    images[recipe.image?.replace(/\.[^.]+$/, "") ?? ""] ?? images["example"];
 
   return (
-    <div className="recipe-tile" onClick={() => onSelect(recipe)}>
-      <img className="recipe-tile-image" src={imageSrc} alt={recipe.title} />
-      <div className="recipe-tile-info">
-        <h3 className="recipe-tile-title">{recipe.title}</h3>
-        <div className="recipe-meta">
+    <div className="recipe-card" onClick={() => onSelect(recipe)}>
+      <img className="recipe-card-image" src={imageSrc} alt={recipe.title} />
+      <div>
+        <h4>{recipe.title}</h4>
+        <div className="badge-wrapper">
           {recipe.keywords.map((keyword) => (
             <Badge key={keyword} label={keyword} />
           ))}

@@ -1,8 +1,25 @@
 :root {
+  --color-primary: #213547;
+  --color-secondary: #ddd;
+  --color-gray: #666;
+  --color-dark-gray: #444;
+  --color-light-gray: #f0f0f0;
+  --border-width: 2px;
+  --border-width-small: 1px;
+  --border-radius: 8px;
+  --border-radius-round: 1000px;
+  --font-weight-bold: 600;
+  --font-weight-very-bold: 700;
+  --font-size-small: 0.75rem;
+  --grid-gap: 1rem;
+  --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  --box-transform: translateY(-1px);
+  --padding-small: 4px;
+  --padding-btn: 0.5rem 0.75rem;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #213547;
+  color: var(--color-primary);
   background-color: #ffffff;
 }
 

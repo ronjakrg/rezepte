@@ -1,9 +1,10 @@
 import { useState } from "react";
 import RecipeTab from "./components/RecipeTab";
+import MealplanTab from "./components/MealplanTab";
 import type { Recipe } from "./types";
 import "./css/App.css";
 
-const tabs = ["Rezepte", "Woche 9"] as const;
+const tabs = ["Rezepte", "Woche 10"] as const;
 type Tab = (typeof tabs)[number];
 
 function App() {
@@ -14,9 +15,13 @@ function App() {
     <div className="app">
       <nav className="tabs">
         {selectedRecipe ? (
-          <button className="back-button" onClick={() => setSelectedRecipe(null)}>←</button>
+          <button className="icon-btn" onClick={() => setSelectedRecipe(null)}>
+            ←
+          </button>
         ) : (
-          <span className="back-button"><i className="bi bi-house-door-fill"></i></span>
+          <span className="icon-btn">
+            <i className="bi bi-house-door-fill"></i>
+          </span>
         )}
         <div className="tabs-line">
           {tabs.map((tab) => (
@@ -40,8 +45,13 @@ function App() {
             onSelectRecipe={setSelectedRecipe}
           />
         )}
-        {activeTab === "Woche 9" && (
-          <p className="wip">Work in progress ...</p>
+        {activeTab === "Woche 10" && (
+          <MealplanTab
+            onSelectRecipe={(recipe) => {
+              setSelectedRecipe(recipe);
+              setActiveTab("Rezepte");
+            }}
+          />
         )}
       </main>
     </div>
