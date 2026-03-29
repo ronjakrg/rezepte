@@ -14,7 +14,9 @@ import "./css/App.css";
 
 function App() {
   const [mealplans, setMealplans] = useState<MealplanMeta[]>([]);
-  const [activeTab, setActiveTab] = useState<string>("Rezepte");
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    return localStorage.getItem("activeTab") || "Rezepte";
+  });
   const [activeMealplan, setActiveMealplan] = useState<MealplanMeta | null>(
     null,
   );
@@ -28,9 +30,19 @@ function App() {
     fetchMealplanList()
       .then((list) => {
         setMealplans(list);
-        if (list.length > 0) {
-          setActiveMealplan(list[0]);
-          setActiveTab(list[0].name);
+        const savedTab = localStorage.getItem("activeTab");
+        if (savedTab === "Rezepte") {
+          setActiveMealplan(null);
+          setActiveTab("Rezepte");
+        } else if (list.length > 0) {
+          const found = list.find((p) => p.name === savedTab);
+          if (found) {
+            setActiveMealplan(found);
+            setActiveTab(found.name);
+          } else {
+            setActiveMealplan(list[0]);
+            setActiveTab(list[0].name);
+          }
         }
       })
       .catch(console.error);
@@ -39,6 +51,7 @@ function App() {
   function handleSelectMealplanTab(plan: MealplanMeta) {
     setActiveMealplan(plan);
     setActiveTab(plan.name);
+    localStorage.setItem("activeTab", plan.name);
     setSelectedRecipe(null);
   }
 
@@ -86,15 +99,23 @@ function App() {
             <i className="bi bi-arrow-left"></i>
           </button>
         ) : (
-          <span className="icon-btn">
+          <button
+            className="icon-btn"
+            onClick={() => {
+              setActiveTab("Rezepte");
+              localStorage.setItem("activeTab", "Rezepte");
+              setSelectedRecipe(null);
+            }}
+          >
             <i className="bi bi-house-door-fill"></i>
-          </span>
+          </button>
         )}
         <div className="tabs-line">
           <button
             className={`tab ${activeTab === "Rezepte" ? "tab-active" : ""}`}
             onClick={() => {
               setActiveTab("Rezepte");
+              localStorage.setItem("activeTab", "Rezepte");
               setSelectedRecipe(null);
             }}
           >
