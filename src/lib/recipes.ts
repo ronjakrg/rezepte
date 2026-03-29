@@ -22,15 +22,20 @@ async function loadRecipes(): Promise<Recipe[]> {
 
 // Hook for components
 export function useRecipes(): Recipe[] {
-  const [recipes, setRecipes] = useState<Recipe[]>(cache ?? []);
+  const [recipes, setRecipes] = useState<Recipe[]>(() => cache ?? []);
 
   useEffect(() => {
+    let didSet = false;
     if (cache) {
-      setRecipes(cache);
-      return;
+      Promise.resolve().then(() => {
+        setRecipes(cache!);
+      });
+      didSet = true;
     }
-    listeners.push(setRecipes);
-    loadRecipes().catch(console.error);
+    if (!didSet) {
+      listeners.push(setRecipes);
+      loadRecipes().catch(console.error);
+    }
     return () => {
       const idx = listeners.indexOf(setRecipes);
       if (idx !== -1) listeners.splice(idx, 1);
