@@ -129,9 +129,8 @@ function App() {
             >
               {plan.displayName}
               <span
-                className="tab-delete-btn"
                 role="button"
-                aria-label={`Delete ${plan.displayName}`}
+                style={{ marginLeft: "0.25rem" }}
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowDeleteConfirm(plan);
