@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type {
   Recipe,
   WeeklyMealplan,
@@ -7,46 +7,65 @@ import type {
   MealplanEntry,
 } from "../types";
 import { WEEKDAYS, MEAL_TYPES, WEEKDAY_LABELS, MEAL_LABELS } from "../types";
-import { initialMealplan } from "../lib/mealplan";
-import allRecipes from "../lib/recipes";
+import {
+  createEmptyMealplan,
+  fetchMealplan,
+  saveMealplan,
+} from "../lib/mealplan";
+import { useRecipes } from "../lib/recipes";
 import images from "../lib/images";
 import RecipePicker from "./RecipePicker";
 
 interface MealplanTabProps {
+  name: string;
   onSelectRecipe: (recipe: Recipe) => void;
 }
 
-function MealplanTab({ onSelectRecipe }: MealplanTabProps) {
-  const [mealplan, setMealplan] = useState<WeeklyMealplan>(initialMealplan);
+function MealplanTab({ name, onSelectRecipe }: MealplanTabProps) {
+  const allRecipes = useRecipes();
+  const [mealplan, setMealplan] = useState<WeeklyMealplan>(
+    createEmptyMealplan(),
+  );
   const [pickerTarget, setPickerTarget] = useState<{
     day: Weekday;
     meal: MealType;
   } | null>(null);
 
-  function getRecipeImage(tile: MealplanEntry): string | undefined {
+  useEffect(() => {
+    fetchMealplan(name).then(setMealplan).catch(console.error);
+  }, [name]);
+
+  function getRecipeImage(tile: MealplanEntry): string {
     if (!tile || !tile.isRecipe) return images["example"];
     const recipe = allRecipes.find((r) => r.title === tile.title);
     if (!recipe?.image) return images["example"];
-    return images[recipe.image.replace(/\.[^.]+$/, "")] ?? images["example"];
+    return images[recipe.image];
+  }
+
+  function updateMealplan(updated: WeeklyMealplan) {
+    setMealplan(updated);
+    saveMealplan(name, updated).catch(console.error);
   }
 
   function handleSelect(entry: MealplanEntry) {
     if (!pickerTarget) return;
-    setMealplan((prev) => ({
-      ...prev,
+    const updated = {
+      ...mealplan,
       [pickerTarget.day]: {
-        ...prev[pickerTarget.day],
+        ...mealplan[pickerTarget.day],
         [pickerTarget.meal]: { title: entry.title, isRecipe: entry.isRecipe },
       },
-    }));
+    };
+    updateMealplan(updated);
     setPickerTarget(null);
   }
 
   function handleClear(day: Weekday, meal: MealType) {
-    setMealplan((prev) => ({
-      ...prev,
-      [day]: { ...prev[day], [meal]: null },
-    }));
+    const updated = {
+      ...mealplan,
+      [day]: { ...mealplan[day], [meal]: null },
+    };
+    updateMealplan(updated);
   }
 
   return (

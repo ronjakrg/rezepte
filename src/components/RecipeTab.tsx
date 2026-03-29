@@ -1,18 +1,8 @@
-import recipes from "../lib/recipes";
+import { useRecipes } from "../lib/recipes";
 import RecipeCard from "./RecipeCard";
 import RecipeDetails from "./RecipeDetails";
 import type { Recipe } from "../types";
 import { getKeywordIcon } from "../lib/keywords";
-
-const recipesByCategory = recipes.reduce<Record<string, Recipe[]>>(
-  (acc, recipe) => {
-    const cat = recipe.category;
-    if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(recipe);
-    return acc;
-  },
-  {},
-);
 
 interface RecipeTabProps {
   selectedRecipe: Recipe | null;
@@ -20,6 +10,18 @@ interface RecipeTabProps {
 }
 
 function RecipeTab({ selectedRecipe, onSelectRecipe }: RecipeTabProps) {
+  const recipes = useRecipes();
+
+  const recipesByCategory = recipes.reduce<Record<string, Recipe[]>>(
+    (acc, recipe) => {
+      const cat = recipe.category;
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push(recipe);
+      return acc;
+    },
+    {},
+  );
+
   return selectedRecipe ? (
     <RecipeDetails recipe={selectedRecipe} />
   ) : (

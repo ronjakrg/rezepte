@@ -8,8 +8,7 @@ interface RecipeDetailsProps {
 }
 
 function RecipeDetails({ recipe }: RecipeDetailsProps) {
-  const imageSrc =
-    images[recipe.image?.replace(/\.[^.]+$/, "") ?? ""] ?? images["example"];
+  const imageSrc = images[recipe.image ?? ""];
   const [servings, setServings] = useState(1);
 
   return (

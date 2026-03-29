@@ -1,18 +1,43 @@
+import { useState, useEffect } from "react";
 import type { Recipe } from "../types";
 
-const modules = import.meta.glob<Recipe[]>("../../data/recipes/*.json", {
-  eager: true,
-  import: "default",
-});
+let cache: Recipe[] | null = null;
+const listeners: Array<(recipes: Recipe[]) => void> = [];
 
-const entries = Object.entries(modules);
-const nonExample = entries.filter(([path]) => !path.endsWith("/example.json"));
+function notifyListeners(recipes: Recipe[]) {
+  listeners.forEach((fn) => fn(recipes));
+}
 
-const allRecipes: Recipe[] =
-  nonExample.length > 0
-    ? nonExample.flatMap(([, recipes]) => recipes)
-    : entries
-        .filter(([path]) => path.endsWith("/example.json"))
-        .flatMap(([, recipes]) => recipes);
+async function loadRecipes(): Promise<Recipe[]> {
+  if (cache) return cache;
 
-export default allRecipes;
+  const res = await fetch("/data/recipes/recipes.json");
+  if (!res.ok) throw new Error(`Failed to load recipes: ${res.status}`);
+  const data: Recipe[] = await res.json();
+
+  cache = data;
+  notifyListeners(data);
+  return data;
+}
+
+// Hook for components
+export function useRecipes(): Recipe[] {
+  const [recipes, setRecipes] = useState<Recipe[]>(cache ?? []);
+
+  useEffect(() => {
+    if (cache) {
+      setRecipes(cache);
+      return;
+    }
+    listeners.push(setRecipes);
+    loadRecipes().catch(console.error);
+    return () => {
+      const idx = listeners.indexOf(setRecipes);
+      if (idx !== -1) listeners.splice(idx, 1);
+    };
+  }, []);
+
+  return recipes;
+}
+
+export default loadRecipes;

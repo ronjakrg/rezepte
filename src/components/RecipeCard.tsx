@@ -8,8 +8,7 @@ interface RecipeCardProps {
 }
 
 function RecipeCard({ recipe, onSelect }: RecipeCardProps) {
-  const imageSrc =
-    images[recipe.image?.replace(/\.[^.]+$/, "") ?? ""] ?? images["example"];
+  const imageSrc = images[recipe.image ?? ""];
 
   return (
     <div className="recipe-card" onClick={() => onSelect(recipe)}>

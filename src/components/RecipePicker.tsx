@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { MealplanEntry } from "../types";
-import allRecipes from "../lib/recipes";
+import { useRecipes } from "../lib/recipes";
 import RecipeCard from "./RecipeCard";
 
 interface RecipePickerProps {
@@ -9,6 +9,7 @@ interface RecipePickerProps {
 }
 
 function RecipePicker({ onSelect, onClose }: RecipePickerProps) {
+  const allRecipes = useRecipes();
   const [search, setSearch] = useState("");
   const [note, setNote] = useState("");
 
