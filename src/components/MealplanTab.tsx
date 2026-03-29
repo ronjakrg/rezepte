@@ -36,10 +36,9 @@ function MealplanTab({ name, onSelectRecipe }: MealplanTabProps) {
   }, [name]);
 
   function getRecipeImage(tile: MealplanEntry): string {
-    if (!tile || !tile.isRecipe) return images["example"];
+    if (!tile || !tile.isRecipe) return images[null as any];
     const recipe = allRecipes.find((r) => r.title === tile.title);
-    if (!recipe?.image) return images["example"];
-    return images[recipe.image];
+    return images[(recipe?.image ?? null) as any];
   }
 
   function updateMealplan(updated: WeeklyMealplan) {
