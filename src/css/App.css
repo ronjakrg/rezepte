@@ -227,6 +227,7 @@ details[open] > summary .summary-chevron {
   align-items: center;
   justify-content: center;
   padding: var(--padding-small);
+  background-color: white;
 }
 .mealplan-cell-filled {
   border: var(--border-width) solid var(--color-secondary);
@@ -236,6 +237,15 @@ details[open] > summary .summary-chevron {
 }
 .mealplan-cell:hover {
   border-color: var(--color-gray);
+}
+.mealplan-cell-drag-over {
+  background-color: var(--color-light-blue);
+}
+.mealplan-cell-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .mealplan-plus-icon {
   font-size: 1.5rem;
@@ -251,10 +261,7 @@ details[open] > summary .summary-chevron {
   line-height: 1.2;
   text-align: center;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  padding: var(--padding-small);
 }
 .mealplan-remove-btn {
   position: absolute;
