@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import RecipeTab from "./components/RecipeTab";
 import MealplanTab from "./components/MealplanTab";
-import NewMealplanDialog from "./components/NewMealplanDialog";
-import DeleteMealplanDialog from "./components/DeleteMealplanDialog";
+import NewMealplanDialog from "./components/MealplanDialogCreate";
+import DeleteMealplanDialog from "./components/MealplanDialogDelete";
 import type { Recipe } from "./types";
 import {
   fetchMealplanList,

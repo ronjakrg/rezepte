@@ -5,6 +5,7 @@
   --color-dark-gray: #444;
   --color-light-gray: #f0f0f0;
   --color-light-blue: #f1f9ff;
+  --color-red: rgb(217, 80, 80);
   --border-width: 2px;
   --border-width-small: 1px;
   --border-radius: 8px;
@@ -21,7 +22,7 @@
   line-height: 1.5;
   font-weight: 400;
   color: var(--color-primary);
-  background-color: #ffffff;
+  background-color: white;
 }
 
 body {

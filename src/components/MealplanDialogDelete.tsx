@@ -12,25 +12,21 @@ const DeleteMealplanDialog: React.FC<DeleteMealplanDialogProps> = ({
   onDelete,
   onClose,
 }) => (
-  <div className="recipe-picker-overlay" onClick={onClose}>
-    <div className="recipe-picker-modal" onClick={(e) => e.stopPropagation()}>
+  <div className="modal-overlay" onClick={onClose}>
+    <div className="modal mealplan-dialog" onClick={(e) => e.stopPropagation()}>
       <div className="wrapper">
-        <div className="recipe-picker-header">
-          „{plan.displayName}" löschen?
+        <div className="modal-header">
+          "{plan.displayName}" wirklich löschen?
           <button className="close-btn" onClick={onClose}>
             <i className="bi bi-x-lg"></i>
           </button>
         </div>
-        <div className="recipe-picker-note-row">
-          <button className="arrow-btn" onClick={onClose}>
+        <div className="modal-buttons">
+          <button className="text-button" onClick={onClose}>
             Abbrechen
           </button>
           <button
-            className="arrow-btn"
-            style={{
-              background: "var(--color-danger, #e53e3e)",
-              color: "#fff",
-            }}
+            className="text-button text-button-red"
             onClick={() => onDelete(plan)}
           >
             Löschen

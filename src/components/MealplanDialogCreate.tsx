@@ -13,20 +13,20 @@ const NewMealplanDialog: React.FC<NewMealplanDialogProps> = ({
   onCreate,
   onClose,
 }) => (
-  <div className="recipe-picker-overlay" onClick={onClose}>
-    <div className="recipe-picker-modal" onClick={(e) => e.stopPropagation()}>
+  <div className="modal-overlay" onClick={onClose}>
+    <div className="modal mealplan-dialog" onClick={(e) => e.stopPropagation()}>
       <div className="wrapper">
-        <div className="recipe-picker-header">
-          Neuen Wochenplan erstellen
+        <div className="modal-header">
+          Neuen Mealplan erstellen
           <button className="close-btn" onClick={onClose}>
             <i className="bi bi-x-lg"></i>
           </button>
         </div>
-        <div className="recipe-picker-note-row">
+        <div className="input-row">
           <input
             className="text-input"
             type="text"
-            placeholder="Name (z.B. Woche 11)"
+            placeholder="Name des Mealplans ..."
             value={newName}
             autoFocus
             onChange={(e) => setNewName(e.target.value)}

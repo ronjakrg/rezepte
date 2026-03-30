@@ -32,10 +32,10 @@ function RecipePicker({ onSelect, onClose }: RecipePickerProps) {
   };
 
   return (
-    <div className="recipe-picker-overlay" onClick={onClose}>
-      <div className="recipe-picker-modal" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="wrapper">
-          <div className="recipe-picker-header">
+          <div className="modal-header">
             Rezept auswählen
             <button className="close-btn" onClick={onClose}>
               <i className="bi bi-x-lg"></i>

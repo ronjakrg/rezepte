@@ -50,6 +50,10 @@ h4 {
   color: var(--color-primary);
   background: white;
 }
+.input-row {
+  display: flex;
+  gap: var(--grid-gap);
+}
 
 /* Tabs */
 .tabs {
@@ -101,6 +105,17 @@ h4 {
 .close-btn:hover,
 .close-btn:focus {
   background-color: var(--color-light-gray);
+}
+.text-button {
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  padding: var(--padding-btn);
+  border: none;
+  color: var(--color-primary);
+}
+.text-button-red {
+  background: var(--color-red);
+  color: white;
 }
 .arrow-btn {
   border: var(--border-width-small) solid var(--color-secondary);
@@ -278,11 +293,15 @@ details[open] > summary .summary-chevron {
 }
 .mealplan-remove-icon {
   font-size: 20px;
-  color: rgb(217, 80, 80);
+  color: var(--color-red);
+}
+.mealplan-dialog {
+  width: 50vw !important;
+  max-height: 80vh !important;
 }
 
-/* Recipe picker modal */
-.recipe-picker-overlay {
+/* Modal */
+.modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
@@ -291,8 +310,8 @@ details[open] > summary .summary-chevron {
   justify-content: center;
   z-index: 100;
 }
-.recipe-picker-modal {
-  background: #ffffff;
+.modal {
+  background: white;
   border-radius: var(--border-radius);
   width: 90vw;
   max-height: 80vh;
@@ -301,11 +320,19 @@ details[open] > summary .summary-chevron {
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
-.recipe-picker-header {
+.modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--grid-gap);
+  gap: var(--grid-gap);
+}
+
+/* Recipe picker modal */
 .recipe-picker-note-row {
   width: 42%;
   margin-left: auto;
