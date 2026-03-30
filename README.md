@@ -17,15 +17,15 @@ npm run dev:host
 
 ## 👩‍🍳 Custom Recipes
 
-Place your recipe JSON files and images in the `data/` folder:
+Place your recipe JSON files and images in the `server/data/` folder:
 
 ```
-data/
+server/data/
 ├── recipes/
 │   └── rezepte.json
 └── images/
     └── rezept-bild.png
 ```
 
-- Recipe files should follow the format in `data/recipes/example.json`.
+- Recipe files should follow the format in `server/data/recipes/example.json`.
 - The `data/` folder is git-ignored, so your personal recipes stay local.
