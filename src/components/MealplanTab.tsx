@@ -26,6 +26,7 @@ import {
 import { useRecipes } from "../lib/recipes";
 import images from "../lib/images";
 import RecipePicker from "./RecipePicker";
+import React from "react";
 
 interface MealplanTabProps {
   name: string;
@@ -142,7 +143,7 @@ function MealplanTab({ name, onSelectRecipe }: MealplanTabProps) {
             </div>
           ))}
           {MEAL_TYPES.map((meal) => (
-            <>
+            <React.Fragment key={meal}>
               <div
                 key={`${meal}-label`}
                 className="mealplan-grid-heading-rotated"
@@ -181,7 +182,7 @@ function MealplanTab({ name, onSelectRecipe }: MealplanTabProps) {
                   );
                 }
               })}
-            </>
+            </React.Fragment>
           ))}
         </div>
 
