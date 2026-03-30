@@ -255,6 +255,8 @@ details[open] > summary .summary-chevron {
 .mealplan-cell-image {
   width: 100px;
   border-radius: 6px;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .mealplan-cell-text {
   font-size: var(--font-size-small);
@@ -262,6 +264,7 @@ details[open] > summary .summary-chevron {
   text-align: center;
   overflow: hidden;
   padding: var(--padding-small);
+  user-select: none;
 }
 .mealplan-remove-btn {
   position: absolute;
