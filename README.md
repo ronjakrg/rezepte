@@ -1,8 +1,8 @@
 # 🥘 Rezepte
 
-A minimal recipe app built with React, Vite and TypeScript.
+A minimal recipe and mealplan app built with React, Vite, TypeScript, and Express.
 
-## ⚙️ Setup
+## 🚀 Getting started
 
 ```bash
 npm install
@@ -14,6 +14,8 @@ To access the app from other devices on your network:
 ```bash
 npm run dev:host
 ```
+
+You can install this app as a standalone web app on your mobile device. Open the app in your browser, tap the 'Share' button, select 'Add to Home Screen', and launch it from your home screen for a native app-like experience.
 
 ## 👩‍🍳 Custom Recipes
 
