@@ -7,6 +7,7 @@ export interface KeywordIcon {
 
 const keywordIcons: Record<string, KeywordIcon> = {
   Auflauf: { type: "emoji", value: "🍲" },
+  Frühstück: { type: "emoji", value: "☕️" },
   Ofen: { type: "image", value: ovenIcon },
   "One-Pot": { type: "emoji", value: "🥘" },
   "One-Pot Gericht": { type: "emoji", value: "🥘" },
