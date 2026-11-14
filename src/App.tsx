@@ -3,6 +3,7 @@ import RecipeTab from "./components/RecipeTab";
 import MealplanTab from "./components/MealplanTab";
 import NewMealplanDialog from "./components/MealplanDialogCreate";
 import DeleteMealplanDialog from "./components/MealplanDialogDelete";
+import RecipeDialog from "./components/RecipeDialogCreate";
 import type { Recipe } from "./types";
 import {
   fetchMealplanList,
@@ -21,7 +22,12 @@ function App() {
     null,
   );
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [returnTab, setReturnTab] = useState<MealplanMeta | null>(null);
   const [showNewDialog, setShowNewDialog] = useState(false);
+  // null: closed, {}: new recipe, { recipe }: edit that recipe
+  const [recipeDialog, setRecipeDialog] = useState<{ recipe?: Recipe } | null>(
+    null,
+  );
   const [newName, setNewName] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] =
     useState<MealplanMeta | null>(null);
@@ -53,6 +59,16 @@ function App() {
     setActiveTab(plan.name);
     localStorage.setItem("activeTab", plan.name);
     setSelectedRecipe(null);
+    setReturnTab(null);
+  }
+
+  function handleBack() {
+    setSelectedRecipe(null);
+    if (returnTab) {
+      setActiveMealplan(returnTab);
+      setActiveTab(returnTab.name);
+      setReturnTab(null);
+    }
   }
 
   async function handleCreateMealplan() {
@@ -95,7 +111,7 @@ function App() {
     <div className="app">
       <nav className="tabs">
         {selectedRecipe ? (
-          <button className="icon-btn" onClick={() => setSelectedRecipe(null)}>
+          <button className="icon-btn" onClick={handleBack}>
             <i className="bi bi-arrow-left"></i>
           </button>
         ) : (
@@ -105,6 +121,7 @@ function App() {
               setActiveTab("Rezepte");
               localStorage.setItem("activeTab", "Rezepte");
               setSelectedRecipe(null);
+              setReturnTab(null);
             }}
           >
             <i className="bi bi-house-door-fill"></i>
@@ -117,6 +134,7 @@ function App() {
               setActiveTab("Rezepte");
               localStorage.setItem("activeTab", "Rezepte");
               setSelectedRecipe(null);
+              setReturnTab(null);
             }}
           >
             Rezepte
@@ -143,6 +161,12 @@ function App() {
           <button className="icon-btn" onClick={() => setShowNewDialog(true)}>
             <i className="bi bi-plus-lg"></i>
           </button>
+          <button
+            className="text-button text-button-primary tabs-action"
+            onClick={() => setRecipeDialog({})}
+          >
+            <i className="bi bi-plus-lg"></i> Neues Rezept
+          </button>
         </div>
       </nav>
 
@@ -151,12 +175,14 @@ function App() {
           <RecipeTab
             selectedRecipe={selectedRecipe}
             onSelectRecipe={setSelectedRecipe}
+            onEditRecipe={(recipe) => setRecipeDialog({ recipe })}
           />
         )}
         {activeMealplan && activeTab === activeMealplan.name && (
           <MealplanTab
             name={activeMealplan.name}
             onSelectRecipe={(recipe) => {
+              setReturnTab(activeMealplan);
               setSelectedRecipe(recipe);
               setActiveTab("Rezepte");
             }}
@@ -169,6 +195,22 @@ function App() {
           setNewName={setNewName}
           onCreate={handleCreateMealplan}
           onClose={() => setShowNewDialog(false)}
+        />
+      )}
+      {recipeDialog && (
+        <RecipeDialog
+          recipe={recipeDialog.recipe}
+          onSaved={(recipe) => {
+            if (!recipeDialog.recipe) {
+              // new recipe: show it in the Rezepte tab
+              setActiveTab("Rezepte");
+              localStorage.setItem("activeTab", "Rezepte");
+              setReturnTab(null);
+            }
+            setRecipeDialog(null);
+            setSelectedRecipe(recipe);
+          }}
+          onClose={() => setRecipeDialog(null)}
         />
       )}
       {showDeleteConfirm && (

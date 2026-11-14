@@ -5,9 +5,10 @@ import Badge from "./Badge";
 
 interface RecipeDetailsProps {
   recipe: Recipe;
+  onEdit: (recipe: Recipe) => void;
 }
 
-function RecipeDetails({ recipe }: RecipeDetailsProps) {
+function RecipeDetails({ recipe, onEdit }: RecipeDetailsProps) {
   const imageSrc = images[recipe.image ?? ""];
   const [servings, setServings] = useState(1);
 
@@ -15,6 +16,13 @@ function RecipeDetails({ recipe }: RecipeDetailsProps) {
     <div>
       <div className="flex-heading">
         <h2>{recipe.title}</h2>
+        <button
+          className="edit-btn"
+          aria-label="Rezept bearbeiten"
+          onClick={() => onEdit(recipe)}
+        >
+          <i className="bi bi-pencil-fill"></i>
+        </button>
         <div className="badge-wrapper">
           <span className="badge">🕐 {recipe.preptime} min</span>
           <Badge label={recipe.category} />

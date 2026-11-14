@@ -82,6 +82,13 @@ h4 {
   border-bottom-color: var(--color-primary);
 }
 
+.tabs-action {
+  margin-left: auto;
+  align-self: center;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+}
+
 /* Buttons */
 .icon-btn {
   background: none;
@@ -102,6 +109,16 @@ h4 {
   cursor: pointer;
   color: var(--color-gray);
 }
+.edit-btn {
+  background: none;
+  border: none;
+  padding: 0.2rem;
+  margin-left: -0.5rem; /* sit closer to the title than the heading gap */
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--color-primary);
+}
 .close-btn:hover,
 .close-btn:focus {
   background-color: var(--color-light-gray);
@@ -112,6 +129,10 @@ h4 {
   padding: var(--padding-btn);
   border: none;
   color: var(--color-primary);
+}
+.text-button-primary {
+  background: var(--color-primary);
+  color: white;
 }
 .text-button-red {
   background: var(--color-red);
@@ -346,4 +367,162 @@ details[open] > summary .summary-chevron {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--grid-gap);
+}
+
+/* New recipe dialog */
+.recipe-dialog {
+  width: 50vw;
+}
+.recipe-dialog .wrapper {
+  overflow-y: auto;
+}
+.recipe-dialog-split {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--grid-gap);
+}
+.image-tile {
+  margin-top: 1.5rem;
+  align-self: start;
+  aspect-ratio: 1 / 1;
+  border: var(--border-width) dashed var(--color-secondary);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--color-secondary);
+}
+.image-tile:hover {
+  border-color: var(--color-gray);
+}
+.image-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.form-heading {
+  display: block;
+  margin: 1.5rem 0 0.5rem;
+}
+.form-row {
+  display: grid;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.form-row .text-input,
+.badge-wrapper .text-input {
+  margin-top: 0;
+}
+.form-row-ingredient {
+  grid-template-columns: 1rem 5rem 6rem 1fr auto;
+  background: white;
+}
+.form-drag-handle {
+  color: var(--color-gray);
+  cursor: grab;
+  touch-action: none;
+}
+.form-row-dragging {
+  position: relative;
+  z-index: 1;
+  /* white frame drawn as a shadow spread, so the layout doesn't shift */
+  box-shadow:
+    0 0 0 0.5rem white,
+    0 2px 12px 0.5rem rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+}
+.form-row-dragging .form-drag-handle {
+  cursor: grabbing;
+}
+.form-row-step {
+  grid-template-columns: 1.5rem 1fr auto;
+}
+.form-step-number {
+  color: var(--color-gray);
+  text-align: right;
+  font-size: 0.8333rem; /* browser default size of input text */
+}
+.form-checkbox input {
+  accent-color: var(--color-primary);
+}
+.form-checkbox {
+  margin-bottom: 0;
+}
+.form-checkbox + .input-row .text-input {
+  margin-top: 0.5rem;
+}
+.suggest {
+  position: relative;
+  width: 100%;
+}
+.suggest-list {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: 0.25rem 0 0;
+  padding: 0.25rem;
+  list-style: none;
+  background: white;
+  border: var(--border-width-small) solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  max-height: 12rem;
+  overflow-y: auto;
+}
+.suggest-list li {
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  border-radius: calc(var(--border-radius) / 2);
+  font-size: 0.8333rem;
+  cursor: pointer;
+}
+.suggest-active {
+  background: var(--color-primary);
+  color: white;
+}
+.form-add-btn {
+  font-size: var(--font-size-small);
+}
+.form-add-btn-ingredient {
+  /* handle (1rem) + Menge (5rem) + Einheit (6rem) + 3 row gaps (0.5rem) */
+  margin-left: 13.5rem;
+}
+.form-add-btn-step {
+  margin-left: 2rem; /* step number column (1.5rem) + row gap (0.5rem) */
+}
+.form-input-small {
+  width: 12rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--border-radius-round);
+  font-size: var(--font-size-small);
+}
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.form-error {
+  margin-right: auto;
+  align-self: center;
+  color: var(--color-red);
+  font-size: var(--font-size-small);
+}
+.badge-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.45;
+}
+.badge-toggle-active {
+  opacity: 1;
+}
+.badge-toggle-active .badge {
+  border-color: var(--color-primary);
 }

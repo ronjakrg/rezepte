@@ -7,9 +7,14 @@ import { getKeywordIcon } from "../lib/keywords";
 interface RecipeTabProps {
   selectedRecipe: Recipe | null;
   onSelectRecipe: (recipe: Recipe | null) => void;
+  onEditRecipe: (recipe: Recipe) => void;
 }
 
-function RecipeTab({ selectedRecipe, onSelectRecipe }: RecipeTabProps) {
+function RecipeTab({
+  selectedRecipe,
+  onSelectRecipe,
+  onEditRecipe,
+}: RecipeTabProps) {
   const recipes = useRecipes();
 
   const recipesByCategory = recipes.reduce<Record<string, Recipe[]>>(
@@ -23,7 +28,7 @@ function RecipeTab({ selectedRecipe, onSelectRecipe }: RecipeTabProps) {
   );
 
   return selectedRecipe ? (
-    <RecipeDetails recipe={selectedRecipe} />
+    <RecipeDetails recipe={selectedRecipe} onEdit={onEditRecipe} />
   ) : (
     <>
       {Object.entries(recipesByCategory).map(([category, items]) => (

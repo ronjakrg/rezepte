@@ -20,20 +20,57 @@ async function loadRecipes(): Promise<Recipe[]> {
   return data;
 }
 
+// image: optional JPEG data URL, saved by the server under the recipe's name
+export async function createRecipe(
+  recipe: Recipe,
+  image?: string,
+): Promise<Recipe> {
+  const res = await fetch("/api/recipes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ recipe, image }),
+  });
+  if (res.status === 409)
+    throw new Error("Ein Rezept mit diesem Namen gibt es schon");
+  if (!res.ok) throw new Error(`Failed to create recipe: ${res.status}`);
+
+  const created: Recipe = await res.json();
+  cache = [...(cache ?? []), created];
+  notifyListeners(cache);
+  return created;
+}
+
+export async function updateRecipe(
+  originalTitle: string,
+  recipe: Recipe,
+  image?: string,
+): Promise<Recipe> {
+  const res = await fetch("/api/recipes", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ originalTitle, recipe, image }),
+  });
+  if (res.status === 409)
+    throw new Error("Ein Rezept mit diesem Namen gibt es schon");
+  if (!res.ok) throw new Error(`Failed to update recipe: ${res.status}`);
+
+  const updated: Recipe = await res.json();
+  cache = (cache ?? []).map((r) => (r.title === originalTitle ? updated : r));
+  notifyListeners(cache);
+  return updated;
+}
+
 // Hook for components
 export function useRecipes(): Recipe[] {
   const [recipes, setRecipes] = useState<Recipe[]>(() => cache ?? []);
 
   useEffect(() => {
-    let didSet = false;
+    listeners.push(setRecipes);
     if (cache) {
       Promise.resolve().then(() => {
         setRecipes(cache!);
       });
-      didSet = true;
-    }
-    if (!didSet) {
-      listeners.push(setRecipes);
+    } else {
       loadRecipes().catch(console.error);
     }
     return () => {
